@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"net/http"
+
+	"example.com/crt-11/bots"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -11,6 +13,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	http.HandleFunc("/", handler)
-	http.HandleFunc("/callback", handler)
+	http.HandleFunc("/callback", bots.Greet)
 	http.ListenAndServe(":8080", nil)
 }
