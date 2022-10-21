@@ -5,31 +5,28 @@ import (
 	"os"
 
 	"example.com/crt-11/openweathermap"
-	"github.com/gin-gonic/gin"
 	"github.com/line/line-bot-sdk-go/linebot"
 )
 
 func main() {
-	r := gin.Default()
-	r.POST("/callback", func(c *gin.Context) {
-		bot, err := linebot.New(
-			os.Getenv("LINE_BOT_CHANNEL_SECRET"),
-			os.Getenv("LINE_BOT_CHANNEL_TOKEN"),
-		)
+	bot, err := linebot.New(
+		os.Getenv("LINE_BOT_CHANNEL_SECRET"),
+		os.Getenv("LINE_BOT_CHANNEL_TOKEN"),
+	)
 
-		if err != nil {
-			log.Fatal(err)
-		}
+	if err != nil {
+		log.Fatal(err)
+	}
 
-		res, err := openweathermap.GetWeatherData()
-		if err != nil {
-			log.Fatal(err)
-		}
+	result, err := openweathermap.GetWeatherData()
 
-		msg := linebot.NewTextMessage(res)
-		if _, err := bot.BroadcastMessage(msg).Do(); err != nil {
-			log.Fatal(err)
-		}
-	})
-	r.Run()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	message := linebot.NewTextMessage(result)
+
+	if _, err := bot.BroadcastMessage(message).Do(); err != nil {
+		log.Fatal(err)
+	}
 }
