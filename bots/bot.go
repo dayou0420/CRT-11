@@ -2,14 +2,20 @@ package bots
 
 import (
 	"log"
-	"net/http"
 	"os"
 
 	"example.com/crt-11/openweathermap"
+	"github.com/joho/godotenv"
 	"github.com/line/line-bot-sdk-go/linebot"
 )
 
-func Greet(_ http.ResponseWriter, _ *http.Request) {
+func Handler() {
+
+	err := godotenv.Load(".env")
+
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	bot, err := linebot.New(
 		os.Getenv("LINE_BOT_CHANNEL_SECRET"),
