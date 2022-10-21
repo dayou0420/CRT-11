@@ -5,11 +5,12 @@ import (
 	"os"
 
 	"example.com/crt-11/openweathermap"
+	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"github.com/line/line-bot-sdk-go/linebot"
 )
 
-func Handler() {
+func Handler(c *gin.Context) {
 
 	err := godotenv.Load(".env")
 
