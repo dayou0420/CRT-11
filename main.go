@@ -2,7 +2,6 @@ package main
 
 import (
 	"log"
-	"net/http"
 	"os"
 
 	"example.com/crt-11/openweathermap"
@@ -12,16 +11,12 @@ import (
 
 func main() {
 	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "pong",
-		})
-	})
 	r.POST("/callback", func(c *gin.Context) {
 		bot, err := linebot.New(
 			os.Getenv("LINE_BOT_CHANNEL_SECRET"),
 			os.Getenv("LINE_BOT_CHANNEL_TOKEN"),
 		)
+
 		if err != nil {
 			log.Fatal(err)
 		}
