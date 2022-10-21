@@ -1,18 +1,40 @@
 package main
 
 import (
-	"fmt"
+	"log"
 	"net/http"
+	"os"
 
-	"example.com/crt-11/bots"
+	"example.com/crt-11/openweathermap"
+	"github.com/gin-gonic/gin"
+	"github.com/line/line-bot-sdk-go/linebot"
 )
 
-func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello, World 👋!")
-}
-
 func main() {
-	http.HandleFunc("/", handler)
-	http.HandleFunc("/callback", bots.Greet)
-	http.ListenAndServe(":8080", nil)
+	r := gin.Default()
+	r.GET("/ping", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{
+			"message": "pong",
+		})
+	})
+	r.POST("/callback", func(c *gin.Context) {
+		bot, err := linebot.New(
+			os.Getenv("LINE_BOT_CHANNEL_SECRET"),
+			os.Getenv("LINE_BOT_CHANNEL_TOKEN"),
+		)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		res, err := openweathermap.GetWeatherData()
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		msg := linebot.NewTextMessage(res)
+		if _, err := bot.BroadcastMessage(msg).Do(); err != nil {
+			log.Fatal(err)
+		}
+	})
+	r.Run()
 }
