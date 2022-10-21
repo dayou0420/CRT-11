@@ -4,7 +4,6 @@ import (
 	"log"
 	"os"
 
-	"example.com/crt-11/openweathermap"
 	"github.com/line/line-bot-sdk-go/linebot"
 )
 
@@ -18,11 +17,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	result, err := openweathermap.GetWeatherData()
-
-	if err != nil {
-		log.Fatal(err)
-	}
+	result := "hello"
 
 	message := linebot.NewTextMessage(result)
 
