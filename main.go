@@ -55,7 +55,6 @@ func init() {
 }
 
 func main() {
-
 	defer mongoclient.Disconnect(ctx)
 
 	r.GET("/", func(c *gin.Context) {
@@ -69,5 +68,5 @@ func main() {
 	basepath := r.Group("/v1")
 	uc.RegisterUserRoutes(basepath)
 
-	log.Fatal(r.Run(":8080"))
+	r.Run()
 }
