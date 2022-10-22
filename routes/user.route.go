@@ -7,8 +7,8 @@ import (
 
 func UserRoute(router *gin.Engine) {
 	router.GET("/users", controllers.GetAllUsers())
-	router.GET("/user/:userId", controllers.GetAUser())
+	router.GET("/user/:userId", controllers.GetUser())
 	router.POST("/user", controllers.CreateUser())
-	router.PUT("/user/:userId", controllers.EditAUser())
-	router.DELETE("/user/:userId", controllers.DeleteAUser())
+	router.PUT("/user/:userId", controllers.EditUser())
+	router.DELETE("/user/:userId", controllers.DeleteUser())
 }
