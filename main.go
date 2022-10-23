@@ -16,5 +16,7 @@ func main() {
 
 	routes.UserRoute(r)
 
+	routes.CityRoute(r)
+
 	r.Run()
 }
