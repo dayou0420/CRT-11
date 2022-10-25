@@ -3,8 +3,14 @@ package main
 import (
 	"example.com/crt-11/bots"
 	"example.com/crt-11/configs"
+	"example.com/crt-11/controllers"
 	"example.com/crt-11/routes"
 	"github.com/gin-gonic/gin"
+)
+
+var (
+	server *gin.Engine
+	tc     controllers.TaskController
 )
 
 func main() {
@@ -17,6 +23,9 @@ func main() {
 	routes.UserRoute(r)
 
 	routes.CityRoute(r)
+
+	basepath := server.Group("/v1")
+	tc.RegisterTaskRoutes(basepath)
 
 	r.Run()
 }
