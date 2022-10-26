@@ -8,7 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var tc controllers.TaskController
+var c controllers.TaskController
 
 func main() {
 	r := gin.Default()
@@ -22,7 +22,7 @@ func main() {
 	routes.CityRoute(r)
 
 	basepath := r.Group("/v1")
-	tc.Routes(basepath)
+	c.TaskRoute(basepath)
 
 	r.Run()
 }
