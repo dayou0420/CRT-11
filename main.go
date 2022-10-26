@@ -22,7 +22,7 @@ func main() {
 	routes.CityRoute(r)
 
 	basepath := r.Group("/v1")
-	tc.RegisterTaskRoutes(basepath)
+	tc.Routes(basepath)
 
 	r.Run()
 }
