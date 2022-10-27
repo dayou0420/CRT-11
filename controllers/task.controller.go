@@ -103,8 +103,11 @@ func (tc *TaskController) Create(c *gin.Context) {
 	}
 
 	newTask := models.Task{
-		Id:   primitive.NewObjectID(),
-		Name: task.Name,
+		Id:      primitive.NewObjectID(),
+		Name:    task.Name,
+		Date:    task.Date,
+		Bill:    task.Bill,
+		Account: task.Account,
 	}
 
 	result, err := taskCollection.InsertOne(ctx, newTask)
