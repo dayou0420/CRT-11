@@ -36,24 +36,18 @@ func main() {
 			return
 		}
 
-		var replyText string
-		replyText = "可愛い"
-
-		var response string
-		response = "ありがとう！！"
-
-		var replySticker string
-		replySticker = "おはよう"
-
+		// var replyText string
+		replyText := "可愛い"
+		// var response string
+		response := "ありがとう！！"
+		// var replySticker string
+		replySticker := "おはよう"
 		responseSticker := linebot.NewStickerMessage("11537", "52002757")
-
-		var replyImage string
-		replyImage = "猫"
-
+		// var replyImage string
+		replyImage := "猫"
 		responseImage := linebot.NewImageMessage("https://i.gyazo.com/2db8f85c496dd8f21a91eccc62ceee05.jpg", "https://i.gyazo.com/2db8f85c496dd8f21a91eccc62ceee05.jpg")
-
-		var replyLocation string
-		replyLocation = "ディズニー"
+		// var replyLocation string
+		replyLocation := "ディズニー"
 
 		responseLocation := linebot.NewLocationMessage("東京ディズニーランド", "千葉県浦安市舞浜", 35.632896, 139.880394)
 
