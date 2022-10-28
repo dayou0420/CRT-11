@@ -13,8 +13,6 @@ var c controllers.TaskController
 func main() {
 	r := gin.Default()
 
-	r.Static("/tasks", "./public")
-
 	r.POST("/callback", bots.Handler)
 
 	configs.ConnectDB()
