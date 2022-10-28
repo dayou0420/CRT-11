@@ -19,7 +19,7 @@ type TaskService interface {
 	GetAll() ([]*models.Task, error)
 	Get(*string) (*models.Task, error)
 	Create(*models.Task) error
-	Update(*models.User) error
+	Update(*models.Task) error
 	Delete(*string) error
 }
 
@@ -105,6 +105,14 @@ func (tc *TaskController) Create(c *gin.Context) {
 	newTask := models.Task{
 		Id:   primitive.NewObjectID(),
 		Name: task.Name,
+		Date: task.Date,
+		Bill: task.Bill,
+		Account: models.Account{
+			Name:    task.Account.Name,
+			State:   task.Account.State,
+			City:    task.Account.City,
+			Pincode: task.Account.Pincode,
+		},
 	}
 
 	result, err := taskCollection.InsertOne(ctx, newTask)

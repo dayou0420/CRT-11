@@ -17,8 +17,6 @@ func main() {
 
 	configs.ConnectDB()
 
-	routes.UserRoute(r)
-
 	routes.CityRoute(r)
 
 	basepath := r.Group("/v1")
