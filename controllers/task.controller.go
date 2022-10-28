@@ -19,7 +19,7 @@ type TaskService interface {
 	GetAll() ([]*models.Task, error)
 	Get(*string) (*models.Task, error)
 	Create(*models.Task) error
-	Update(*models.User) error
+	Update(*models.Task) error
 	Delete(*string) error
 }
 
