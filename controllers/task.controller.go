@@ -148,7 +148,7 @@ func (tc *TaskController) Update(c *gin.Context) {
 		return
 	}
 
-	update := bson.M{"name": task.Name}
+	update := bson.M{"name": task.Name, "date": task.Date, "bill": task.Bill}
 	result, err := taskCollection.UpdateOne(ctx, bson.M{"id": objId}, bson.M{"$set": update})
 
 	if err != nil {
