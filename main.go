@@ -13,7 +13,7 @@ var c controllers.TaskController
 func main() {
 	r := gin.Default()
 
-	r.Static("/tasks", "./public")
+	r.Static("/ts", "./public")
 
 	r.POST("/callback", bots.Handler)
 

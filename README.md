@@ -1,2 +1,2 @@
 # CRT-11
-- https://crt-11.onrender.com/tasks
+- https://crt-11.onrender.com/ts

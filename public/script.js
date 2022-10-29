@@ -1,3 +1,6 @@
+const DEV_URL = 'https://crt-11.onrender.com/v1/tasks'
+const LOCAL_URL = 'http://localhost:8080/v1/task'
+
 async function myFetch(url) {
     const response = await fetch(url);
     const json = await response.json();
@@ -5,7 +8,7 @@ async function myFetch(url) {
 }
 
 (async function() {
-    const f = await myFetch('https://crt-11.onrender.com/v1/tasks');
+    const f = await myFetch(DEV_URL);
     const date = f.data.data.map(m => m.date);
     const bill = f.data.data.map(m => m.bill)
 
