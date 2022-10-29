@@ -14,7 +14,7 @@ async function myFetch(url) {
         datasets: [{
             label: 'Utility cost',
             backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderColor: 'gba(75, 192, 192, 1)',
+            borderColor: 'rgba(75, 192, 192, 1)',
             data: bill,
         }]
     };
