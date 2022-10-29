@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"example.com/crt-11/openweathermap"
+	"example.com/crt-11/weather"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"github.com/line/line-bot-sdk-go/linebot"
@@ -27,6 +28,34 @@ func Handler(c *gin.Context) {
 	}
 
 	res, err := openweathermap.GetWeatherData()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	msg := linebot.NewTextMessage(res)
+	if _, err := bot.BroadcastMessage(msg).Do(); err != nil {
+		log.Fatal(err)
+	}
+
+}
+
+func Weather(c *gin.Context) {
+
+	err := godotenv.Load(".env")
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	bot, err := linebot.New(
+		os.Getenv("CHANNEL_SECRET"),
+		os.Getenv("CHANNEL_TOKEN"),
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	res, err := weather.GetWeather()
 	if err != nil {
 		log.Fatal(err)
 	}
