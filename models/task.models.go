@@ -25,18 +25,11 @@ type Gas struct {
 	Account Account `json:"account,omitempty" validate:"required"`
 }
 
-type Water struct {
-	Name    string  `json:"name,omitempty" validate:"required"`
-	Bill    int     `json:"bill,omitempty" validate:"required"`
-	Used    int     `json:"used,omitempty" validate:"required"`
-	Date    string  `json:"date,omitempty" validate:"required"`
-	Account Account `json:"account,omitempty" validate:"required"`
-}
-
 type Task struct {
 	Id    primitive.ObjectID `json:"id,omitempty"`
+	Name  string             `json:"name,omitempty" validate:"required"`
+	Bill  int                `json:"bill,omitempty" validate:"required"`
 	Date  string             `json:"date,omitempty" validate:"required"`
-	Power Power              `json:"power,omitempty" validate:"required"`
 	Gas   Gas                `json:"gas,omitempty" validate:"required"`
-	Water Water              `json:"water,omitempty"`
+	Power Power              `json:"power,omitempty" validate:"required"`
 }

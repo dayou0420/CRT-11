@@ -10,6 +10,7 @@ async function myFetch(url) {
 (async function() {
     const f = await myFetch(DEV_URL);
     const date = f.data.data.map(m => m.date);
+    const bill = f.data.data.map(m => m.bill);
     const powerBill = f.data.data.map(m => m.power.bill);
     const powerUsed = f.data.data.map(m => m.power.used);
     const gasBill = f.data.data.map(m => m.gas.bill);
@@ -18,6 +19,12 @@ async function myFetch(url) {
         labels: date,
         datasets: [
             {
+                label: 'Gas and power bill',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                data: bill,
+            },
+            {
                 label: 'Power bill',
                 backgroundColor: 'rgba(255, 206, 86, 0.2)',
                 borderColor: 'rgba(255, 206, 86, 1)',
@@ -25,8 +32,8 @@ async function myFetch(url) {
             },
             {
                 label: 'Power used',
-                backgroundColor: 'rgba(255, 159, 64, 0.2)',
-                borderColor: 'rgba(255, 159, 64, 1)',
+                backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                borderColor: 'rgba(153, 102, 255, 1)',
                 data: powerUsed,
             },
             {
@@ -37,8 +44,8 @@ async function myFetch(url) {
             },
             {
                 label: 'Gas used',
-                backgroundColor: 'rgba(153, 102, 255, 0.2)',
-                borderColor: 'rgba(153, 102, 255, 1)',
+                backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                borderColor: 'rgba(255, 159, 64, 1)',
                 data: gasUsed,
             }
         ]
@@ -48,11 +55,11 @@ async function myFetch(url) {
         data: data,
         options: {
             layout: {
-                padding: 20
+                padding: 40
             }
         }
     };
-    const myChart = new Chart(
+    const myLineChart = new Chart(
         document.getElementById('myChart'),
         config
     );
