@@ -104,14 +104,42 @@ func (tc *TaskController) Create(c *gin.Context) {
 
 	newTask := models.Task{
 		Id:   primitive.NewObjectID(),
-		Name: task.Name,
 		Date: task.Date,
-		Bill: task.Bill,
-		Account: models.Account{
-			Name:    task.Account.Name,
-			State:   task.Account.State,
-			City:    task.Account.City,
-			Pincode: task.Account.Pincode,
+		Power: models.Power{
+			Name: task.Power.Name,
+			Bill: task.Power.Bill,
+			Used: task.Power.Used,
+			Date: task.Power.Date,
+			Account: models.Account{
+				Name:    task.Power.Account.Name,
+				State:   task.Power.Account.State,
+				City:    task.Power.Account.City,
+				Pincode: task.Power.Account.Pincode,
+			},
+		},
+		Gas: models.Gas{
+			Name: task.Gas.Name,
+			Bill: task.Gas.Bill,
+			Used: task.Gas.Used,
+			Date: task.Gas.Date,
+			Account: models.Account{
+				Name:    task.Gas.Account.Name,
+				State:   task.Gas.Account.State,
+				City:    task.Gas.Account.City,
+				Pincode: task.Gas.Account.Pincode,
+			},
+		},
+		Water: models.Water{
+			Name: task.Water.Name,
+			Bill: task.Water.Bill,
+			Used: task.Water.Used,
+			Date: task.Water.Date,
+			Account: models.Account{
+				Name:    task.Water.Account.Name,
+				State:   task.Water.Account.State,
+				City:    task.Water.Account.City,
+				Pincode: task.Water.Account.Pincode,
+			},
 		},
 	}
 
@@ -148,7 +176,12 @@ func (tc *TaskController) Update(c *gin.Context) {
 		return
 	}
 
-	update := bson.M{"name": task.Name, "date": task.Date, "bill": task.Bill, "account": models.Account{}}
+	update := bson.M{
+		"date":  task.Date,
+		"power": task.Power,
+		"gas":   task.Gas,
+		"water": task.Water,
+	}
 	result, err := taskCollection.UpdateOne(ctx, bson.M{"id": objId}, bson.M{"$set": update})
 
 	if err != nil {

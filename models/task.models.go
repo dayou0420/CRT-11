@@ -6,13 +6,37 @@ type Account struct {
 	Name    string `json:"name,omitempty" validate:"required"`
 	State   string `json:"state,omitempty" validate:"required"`
 	City    string `json:"city,omitempty" validate:"required"`
-	Pincode int    `json:"pincode,omitempty" validate:"required"`
+	Pincode string `json:"pincode,omitempty" validate:"required"`
+}
+
+type Power struct {
+	Name    string  `json:"name,omitempty" validate:"required"`
+	Bill    int     `json:"bill,omitempty" validate:"required"`
+	Used    int     `json:"used,omitempty" validate:"required"`
+	Date    string  `json:"date,omitempty" validate:"required"`
+	Account Account `json:"account,omitempty" validate:"required"`
+}
+
+type Gas struct {
+	Name    string  `json:"name,omitempty" validate:"required"`
+	Bill    int     `json:"bill,omitempty" validate:"required"`
+	Used    int     `json:"used,omitempty" validate:"required"`
+	Date    string  `json:"date,omitempty" validate:"required"`
+	Account Account `json:"account,omitempty" validate:"required"`
+}
+
+type Water struct {
+	Name    string  `json:"name,omitempty" validate:"required"`
+	Bill    int     `json:"bill,omitempty" validate:"required"`
+	Used    int     `json:"used,omitempty" validate:"required"`
+	Date    string  `json:"date,omitempty" validate:"required"`
+	Account Account `json:"account,omitempty" validate:"required"`
 }
 
 type Task struct {
-	Id      primitive.ObjectID `json:"id,omitempty"`
-	Name    string             `json:"name,omitempty" validate:"required"`
-	Date    string             `json:"date,omitempty" validate:"required"`
-	Bill    int                `json:"bill,omitempty" validate:"required"`
-	Account Account            `json:"account,omitempty" validate:"required"`
+	Id    primitive.ObjectID `json:"id,omitempty"`
+	Date  string             `json:"date,omitempty" validate:"required"`
+	Power Power              `json:"power,omitempty" validate:"required"`
+	Gas   Gas                `json:"gas,omitempty" validate:"required"`
+	Water Water              `json:"water,omitempty"`
 }
