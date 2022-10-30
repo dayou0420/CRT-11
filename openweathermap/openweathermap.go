@@ -73,7 +73,20 @@ func GetWeatherData() (str string, err error) {
 	for _, item := range data.Weather {
 		main := strings.ToUpper(item.Main)
 		desc := strings.ToUpper(item.Description)
-		str = "[" + timeNow() + ": " + s + main + " " + desc + " " + strconv.FormatFloat(data.Main.Temp, 'f', 2, 64) + " " + strconv.FormatFloat(float64(data.Main.Humidity), 'f', 2, 64) + "]"
+		str = "[" +
+			timeNow() +
+			": " +
+			s + main +
+			" " +
+			desc +
+			" " +
+			strconv.FormatFloat(data.Main.Temp, 'f', 2, 64) +
+			" " +
+			strconv.FormatFloat(float64(data.Main.Humidity), 'f', 2, 64) +
+			"]" +
+			"[" +
+			"https://crt-11.onrender.com/ts" +
+			"]"
 	}
 
 	return str, err
