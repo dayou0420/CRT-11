@@ -8,7 +8,7 @@ async function myFetch(url) {
 }
 
 (async function() {
-    const f = await myFetch(LOCAL_URL);
+    const f = await myFetch(DEV_URL);
     const date = f.data.data.map(m => m.date);
     const bill = f.data.data.map(m => m.bill);
     const powerBill = f.data.data.map(m => m.power.bill);
