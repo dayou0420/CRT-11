@@ -8,14 +8,14 @@ async function myFetch(url) {
 }
 
 (async function() {
-    const f = await myFetch(DEV_URL);
+    const f = await myFetch(LOCAL_URL);
     const date = f.data.data.map(m => m.date);
     const bill = f.data.data.map(m => m.bill);
     const powerBill = f.data.data.map(m => m.power.bill);
     const powerUsed = f.data.data.map(m => m.power.used);
     const gasBill = f.data.data.map(m => m.gas.bill);
     const gasUsed = f.data.data.map(m => m.gas.used);
-    const data = {
+    const lineData = {
         labels: date,
         datasets: [
             {
@@ -50,9 +50,9 @@ async function myFetch(url) {
             }
         ]
     };
-    const config = {
+    const lineConfig = {
         type: 'line',
-        data: data,
+        data: lineData,
         options: {
             layout: {
                 padding: 40
@@ -60,7 +60,38 @@ async function myFetch(url) {
         }
     };
     const myLineChart = new Chart(
-        document.getElementById('myChart'),
-        config
+        document.getElementById('myLineChart'),
+        lineConfig
+    );
+
+    const powerBillSum = powerBill.reduce((pre, cur) => pre + cur, 0);
+    const gasBillSum = gasBill.reduce((pre, cur) => pre + cur, 0);
+
+    const doughnutData = {
+        labels: [
+            'Power bill',
+            'Gas bill'
+        ],
+        datasets: [{
+            data: [powerBillSum, gasBillSum],
+            backgroundColor: [
+                'rgba(255, 206, 86, 1)',
+                'rgba(255, 99, 132, 1)'
+        ],
+            hoverOffset: 4
+        }]
+    };
+    const doughnutConfig = {
+        type: 'doughnut',
+        data: doughnutData,
+        options: {
+            layout: {
+                padding: 200
+            }
+        }
+    };
+    const myDoughnutChart = new Chart(
+        document.getElementById('myDoughnutChart'),
+        doughnutConfig
     );
 })();
