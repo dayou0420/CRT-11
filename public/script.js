@@ -19,7 +19,7 @@ async function myFetch(url) {
         labels: date,
         datasets: [
             {
-                label: 'Gas and power bill',
+                label: 'Power and gas bill',
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                 borderColor: 'rgba(75, 192, 192, 1)',
                 data: bill,
@@ -31,22 +31,10 @@ async function myFetch(url) {
                 data: powerBill,
             },
             {
-                label: 'Power used',
-                backgroundColor: 'rgba(153, 102, 255, 0.2)',
-                borderColor: 'rgba(153, 102, 255, 1)',
-                data: powerUsed,
-            },
-            {
                 label: 'Gas bill',
                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
                 borderColor: 'rgba(255, 99, 132, 1)',
                 data: gasBill,
-            },
-            {
-                label: 'Gas used',
-                backgroundColor: 'rgba(255, 159, 64, 0.2)',
-                borderColor: 'rgba(255, 159, 64, 1)',
-                data: gasUsed,
             }
         ]
     };
@@ -64,34 +52,91 @@ async function myFetch(url) {
         lineConfig
     );
 
-    const powerBillSum = powerBill.reduce((pre, cur) => pre + cur, 0);
-    const gasBillSum = gasBill.reduce((pre, cur) => pre + cur, 0);
-
-    const doughnutData = {
-        labels: [
-            'Power bill',
-            'Gas bill'
-        ],
-        datasets: [{
-            data: [powerBillSum, gasBillSum],
-            backgroundColor: [
-                'rgba(255, 206, 86, 1)',
-                'rgba(255, 99, 132, 1)'
-        ],
-            hoverOffset: 4
-        }]
+    const linePowerUsedData = {
+        labels: date,
+        datasets: [
+            {
+                label: 'Power used',
+                backgroundColor: 'rgba(255, 205, 86, 0.2)',
+                borderColor: 'rgb(255, 205, 86)',
+                data: powerUsed,
+            }
+        ]
     };
-    const doughnutConfig = {
-        type: 'doughnut',
-        data: doughnutData,
+    const linePowerUsedConfig = {
+        type: 'line',
+        data: linePowerUsedData,
         options: {
             layout: {
-                padding: 200
+                padding: 40
             }
         }
     };
-    const myDoughnutChart = new Chart(
-        document.getElementById('myDoughnutChart'),
-        doughnutConfig
+    const myLinePowerUsedChart = new Chart(
+        document.getElementById('myLinePowerUsedChart'),
+        linePowerUsedConfig
+    );
+
+    const lineGasUsedData = {
+        labels: date,
+        datasets: [
+            {
+                label: 'Gas used',
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: gasUsed,
+            }
+        ]
+    };
+    const lineGasUsedConfig = {
+        type: 'line',
+        data: lineGasUsedData,
+        options: {
+            layout: {
+                padding: 40
+            }
+        }
+    };
+    const myLineGasUsedChart = new Chart(
+        document.getElementById('myLineGasUsedChart'),
+        lineGasUsedConfig
+    );
+
+    const billSum = bill.reduce((pre, cur) => pre + cur, 0);
+    const powerBillSum = powerBill.reduce((pre, cur) => pre + cur, 0);
+    const gasBillSum = gasBill.reduce((pre, cur) => pre + cur, 0);
+    const labels = ["Power and gas bill", "Power bill", "Gas bill"]
+    const data = {
+    labels: labels,
+    datasets: [{
+        axis: 'y',
+        label: 'Power and gas bill',
+        data: [billSum,powerBillSum, gasBillSum],
+        backgroundColor: [
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(255, 205, 86, 0.2)',
+        'rgba(255, 99, 132, 0.2)'
+        ],
+        borderColor: [
+        'rgb(75, 192, 192)',
+        'rgb(255, 205, 86)',
+        'rgb(255, 99, 132)'
+        ],
+        borderWidth: 1
+        }]
+    };
+    const config = {
+        type: 'bar',
+        data: data,
+        options: {
+            indexAxis: 'y',
+            layout: {
+                padding: 40
+            }
+        },
+    };
+    const myChart = new Chart(
+        document.getElementById('myChart'),
+        config
     );
 })();
